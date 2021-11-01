@@ -19,6 +19,12 @@ const login = async (email, password) => {
   return {status: 200, message: { token }};
 };
 
+const createUser = async (username, email, password, role) => {
+  const message = await usersModel.createUser(username, email, password, role)
+  return { status: 201, message};
+};
+
 module.exports = {
   login,
+  createUser,
 };
