@@ -3,8 +3,8 @@ const mongoConnection = require('./connection');
 const usersCollection = async () => await mongoConnection.getConnection()
 .then((db) => db.collection('users'));
 
-const login = async (email, password) => {
-  const userLogged = await usersCollection.findOne({ email, password });
+const login = async (email, pwd) => {
+  const userLogged = await usersCollection.findOne({ email, password: pwd });
   return userLogged;
 };
 

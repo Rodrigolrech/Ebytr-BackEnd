@@ -9,8 +9,8 @@ const jwtConfig = {
   expiresIn: '999m'
 };
 
-const login = async (email, password) => {
-  const userLogged = await usersModel.login(email, password);
+const login = async (email, pwd) => {
+  const userLogged = await usersModel.login(email, pwd);
   if (!userLogged) {
     return { status: 401, message: { message: 'Incorrect email or password' }}
   }
