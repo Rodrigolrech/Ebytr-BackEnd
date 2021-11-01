@@ -22,6 +22,6 @@ app.post('/user',
   usersControllers.createUser
 )
 
-const PORT = 3000;
-
-app.listen(PORT, () => console.log(`conectado na porta ${PORT}`));
+module.exports = {
+  app,
+}

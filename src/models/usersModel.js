@@ -1,6 +1,6 @@
 const mongoConnection = require('./connection');
 
-const usersCollection = await mongoConnection.getConnection()
+const usersCollection = async () => await mongoConnection.getConnection()
 .then((db) => db.collection('users'));
 
 const login = async (email, password) => {
