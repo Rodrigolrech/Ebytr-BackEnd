@@ -22,6 +22,4 @@ app.post('/user',
   usersControllers.createUser
 )
 
-module.exports = {
-  app,
-}
+module.exports = app
