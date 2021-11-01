@@ -14,7 +14,14 @@ const createUser = async (username, email, password, role) => {
   return userCreated;
 }
 
+const getByEmail = async (email) => {
+  const userWithEmail = await usersCollection.findOne({ email });
+  return userWithEmail;
+}
+
+
 module.exports = {
   login,
   createUser,
+  getByEmail,
 };

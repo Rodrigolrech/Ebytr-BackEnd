@@ -1,6 +1,6 @@
 const usersModel = require('../models/usersModel');
 
-const checkUserEmail = (req, res) => {
+const checkUserEmail = async (req, res) => {
   const { email } = req.body;
   if (!email) {
     return res.status(400).json({ message: 'Invalid entries. Email not informed.'})
