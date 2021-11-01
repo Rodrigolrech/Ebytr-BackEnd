@@ -1,3 +1,5 @@
+const usersModel = require('../models/usersModel');
+
 const checkUserEmail = (req, res) => {
   const { email } = req.body;
   if (!email) {
