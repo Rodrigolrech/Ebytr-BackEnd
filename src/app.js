@@ -39,10 +39,8 @@ app.post(
   toDoListControllers.insertNewTask,
 );
 
-
 app.get('/tasks', validateJWT, checkSorted, toDoListControllers.getAllTasks);
 
 app.delete('/tasks/:_id', validateJWT, checkIfTaskExists, checkPermission, toDoListControllers.deleteTask);
-
 
 module.exports = app;

@@ -42,9 +42,24 @@ const getAllTasks = async (sorted) => {
   return tasks;
 };
 
+const updateTask = async (_id, newTaskDescription, taskDescriptionHistory, newStatus) => {
+  const getCollection = await mongoConnection.getConnection()
+    .then((db) => db.collection('tasks'));
+  let taskUpdated;
+  if (taskDescriptionHistory) {
+    taskUpdated = await getCollection
+      .updateOne({ _id }, [{ $set: { taskDescriptionHistory, status: newStatus } }]);
+  } else {
+    taskUpdated = await getCollection
+      .updateOne({ _id }, [{ $set: { status: newStatus } }]);
+  }
+  return taskUpdated;
+};
+
 module.exports = {
   insertNewTask,
   deleteTask,
   getTaskById,
   getAllTasks,
+  updateTask,
 };
