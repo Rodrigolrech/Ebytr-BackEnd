@@ -13,7 +13,7 @@ const insertNewTask = async (req, res) => {
 };
 
 const deleteTask = async (req, res) => {
-  const { _id } = req.body;
+  const { _id } = req.params;
   const response = await toDoListService.deleteTask(_id);
   return res.status(response.status).json(response.message);
 };
