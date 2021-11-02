@@ -6,9 +6,9 @@ const insertNewTask = async (req, res) => {
     taskDescription, status,
   } = req.body;
   const { creatorUser } = req.creator;
-  const createdDate = moment().format('DD/MM/YYYY');
+  const createdDate = moment().format('DD/MM/YYYY hh:mm:ss');
   const response = await toDoListService
-    .createUser(taskDescription, status, creatorUser, createdDate);
+    .insertNewTask(taskDescription, status, creatorUser, createdDate);
   return res.status(response.status).json(response.message);
 };
 
