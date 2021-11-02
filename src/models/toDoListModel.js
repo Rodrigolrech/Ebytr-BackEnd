@@ -48,7 +48,13 @@ const updateTask = async (_id, newTaskDescription, taskDescriptionHistory, newSt
   let taskUpdated;
   if (taskDescriptionHistory) {
     taskUpdated = await getCollection
-      .updateOne({ _id }, [{ $set: { taskDescriptionHistory, status: newStatus } }]);
+      .updateOne({ _id }, [{
+        $set: {
+          taskDescriptionHistory,
+          status: newStatus,
+          taskDescription: newTaskDescription,
+        },
+      }]);
   } else {
     taskUpdated = await getCollection
       .updateOne({ _id }, [{ $set: { status: newStatus } }]);
