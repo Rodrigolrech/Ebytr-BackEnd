@@ -29,7 +29,16 @@ const getTaskById = async (_id) => {
 const getAllTasks = async (sorted) => {
   const getCollection = await mongoConnection.getConnection()
     .then((db) => db.collection('tasks'));
-  const tasks = await getCollection.find().sort({ sorted }).toArray();
+  let tasks;
+  if (!sorted || sorted === 'createdDate') {
+    tasks = await getCollection.find().toArray();
+  }
+  if (sorted === 'taskDescription') {
+    tasks = await getCollection.find().sort({ taskDescription: 1 }).toArray();
+  }
+  if (sorted === 'status') {
+    tasks = await getCollection.find().sort({ status: 1 }).toArray();
+  }
   return tasks;
 };
 
