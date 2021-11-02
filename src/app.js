@@ -1,14 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { checkLogin } = require('./middlewares/checkLogin')
-const { 
+const { checkLogin } = require('./middlewares/checkLogin');
+const {
   checkUserEmail,
   checkUserPassword,
   checkUserUsername,
-  checkUserRole
+  checkUserRole,
 } = require('./middlewares/createUser');
-const usersControllers = require('./controllers/usersControllers')
+const usersControllers = require('./controllers/usersControllers');
+
+const validateJWT = require('./middlewares/validateJWT');
+const { checkTaskDescription, checkStatus, checkUserRolePermission } = require('./middlewares/createNewTask');
+const toDoListControllers = require('./controllers/toDoListControllers');
 
 const app = express();
 app.use(bodyParser.json());
@@ -19,7 +23,15 @@ app.post('/user',
   checkUserPassword,
   checkUserRole,
   checkUserUsername,
-  usersControllers.createUser
-)
+  usersControllers.createUser);
 
-module.exports = app
+app.post(
+  '/newTask',
+  validateJWT,
+  checkTaskDescription,
+  checkStatus,
+  checkUserRolePermission,
+  toDoListControllers.insertNewTask,
+);
+
+module.exports = app;
