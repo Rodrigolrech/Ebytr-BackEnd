@@ -16,8 +16,15 @@ const getAllTasks = async (sorted) => {
   return { status: 200, message: tasks };
 };
 
+const updateTask = async (_id, taskDescription, taskDescriptionHistory, status, creator) => {
+  const taskUpdated = await toDoListModel
+    .updateTask(_id, taskDescription, taskDescriptionHistory, status, creator);
+  return { status: 200, message: taskUpdated };
+};
+
 module.exports = {
   insertNewTask,
   deleteTask,
   getAllTasks,
+  updateTask,
 };

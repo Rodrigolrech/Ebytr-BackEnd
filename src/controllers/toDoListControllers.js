@@ -24,8 +24,20 @@ const getAllTasks = async (req, res) => {
   return res.status(response.status).json(response.message);
 };
 
+const updateTask = async (req, res) => {
+  const {
+    params: { _id },
+    body: { taskDescription, status },
+    taskDescriptionHistory, creator,
+  } = req;
+  const response = await toDoListService
+    .updateTask(_id, taskDescription, taskDescriptionHistory, status, creator);
+  return res.status(response.status).json(response.message);
+};
+
 module.exports = {
   insertNewTask,
   deleteTask,
   getAllTasks,
+  updateTask,
 };
