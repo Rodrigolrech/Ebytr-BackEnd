@@ -11,8 +11,7 @@ const validateJWT = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, secret);
     const { data: { _id, username, role } } = payload;
-    req.creator = { _id, username };
-    req.role = role;
+    req.creator = { _id, username, role };
     return next();
   } catch (error) {
     return res.status(401).json({ message: 'jwt malformed' });

@@ -20,7 +20,7 @@ const checkStatus = (req, res, next) => {
 };
 
 const checkUserRolePermission = (req, res, next) => {
-  const { role } = req.role;
+  const { role } = req.creator;
   if (role === 'Developer') return res.status(400).json({ message: 'Developers cannot create a new task' });
   return next();
 };
