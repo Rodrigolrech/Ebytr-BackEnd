@@ -19,7 +19,15 @@ const deleteTask = async (_id) => {
   await getCollection.deleteOne({ _id: ObjectId(_id) });
 };
 
+const getTaskById = async (_id) => {
+  const getCollection = await mongoConnection.getConnection()
+    .then((db) => db.collection('tasks'));
+  const task = await getCollection.findOne({ _id: ObjectId(_id) });
+  return task;
+};
+
 module.exports = {
   insertNewTask,
   deleteTask,
+  getTaskById,
 };
