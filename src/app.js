@@ -19,6 +19,8 @@ const checkPermission = require('./middlewares/checkPermission');
 
 const checkSorted = require('./middlewares/checkSorted');
 
+const { checkNewStatus, checkNewTaskDescription } = require('./middlewares/checkUpdateTask');
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -42,5 +44,15 @@ app.post(
 app.get('/tasks', validateJWT, checkSorted, toDoListControllers.getAllTasks);
 
 app.delete('/tasks/:_id', validateJWT, checkIfTaskExists, checkPermission, toDoListControllers.deleteTask);
+
+app.put(
+  '/task/:_id',
+  validateJWT,
+  checkIfTaskExists,
+  checkNewStatus,
+  checkNewTaskDescription,
+  checkStatus,
+  toDoListControllers.updateTask,
+);
 
 module.exports = app;

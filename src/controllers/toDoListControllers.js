@@ -25,9 +25,13 @@ const getAllTasks = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
-  const { params: { _id }, body: { newTaskDescription, newStatus }, taskDescriptionHistory } = req;
+  const {
+    params: { _id },
+    body: { taskDescription, status },
+    taskDescriptionHistory, creator,
+  } = req;
   const response = await toDoListService
-    .updateTask(_id, newTaskDescription, taskDescriptionHistory, newStatus);
+    .updateTask(_id, taskDescription, taskDescriptionHistory, status, creator);
   return res.status(response.status).json(response.message);
 };
 
