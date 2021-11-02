@@ -16,6 +16,8 @@ const toDoListControllers = require('./controllers/toDoListControllers');
 
 const checkIfTaskExists = require('./middlewares/checkIfTaskExists');
 
+const checkSorted = require('./middlewares/checkSorted');
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -37,5 +39,6 @@ app.post(
 );
 
 app.delete('/tasks/:_id', checkIfTaskExists, toDoListControllers.deleteTask);
+app.get('/tasks', validateJWT, checkSorted, toDoListControllers.getAllTasks);
 
 module.exports = app;
