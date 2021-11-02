@@ -29,7 +29,7 @@ const getTaskById = async (_id) => {
 const getAllTasks = async (sorted) => {
   const getCollection = await mongoConnection.getConnection()
     .then((db) => db.collection('tasks'));
-  const tasks = await getCollection.find().sort({ sorted });
+  const tasks = await getCollection.find().sort({ sorted }).toArray();
   return tasks;
 };
 
