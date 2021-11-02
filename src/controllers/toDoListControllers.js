@@ -12,6 +12,13 @@ const insertNewTask = async (req, res) => {
   return res.status(response.status).json(response.message);
 };
 
+const deleteTask = async (req, res) => {
+  const { _id } = req.params;
+  const response = await toDoListService.deleteTask(_id);
+  return res.status(response.status).json(response.message);
+};
+
 module.exports = {
   insertNewTask,
+  deleteTask,
 };

@@ -14,6 +14,8 @@ const validateJWT = require('./middlewares/validateJWT');
 const { checkTaskDescription, checkStatus, checkUserRolePermission } = require('./middlewares/createNewTask');
 const toDoListControllers = require('./controllers/toDoListControllers');
 
+const checkIfTaskExists = require('./middlewares/checkIfTaskExists');
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -33,5 +35,7 @@ app.post(
   checkUserRolePermission,
   toDoListControllers.insertNewTask,
 );
+
+app.delete('/tasks/:_id', checkIfTaskExists, toDoListControllers.deleteTask);
 
 module.exports = app;
