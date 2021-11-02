@@ -2,7 +2,7 @@ const mongoConnection = require('./connection');
 
 const insertNewTask = async (taskDescription, status, creatorUser, createdDate) => {
   const getCollection = await mongoConnection.getConnection()
-    .then((db) => db.collection('users'));
+    .then((db) => db.collection('tasks'));
   const { insertedId: _id } = await getCollection.insertOne({
     taskDescription, status, creatorUser, createdDate,
   });
