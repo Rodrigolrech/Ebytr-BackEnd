@@ -11,7 +11,7 @@ const {
 const usersControllers = require('./controllers/usersControllers');
 
 const validateJWT = require('./middlewares/validateJWT');
-const { checkTaskDescription, checkStatus } = require('./middlewares/createNewTask');
+const { checkTaskDescription, checkStatus, checkUserRolePermission } = require('./middlewares/createNewTask');
 const toDoListControllers = require('./controllers/toDoListControllers');
 
 const app = express();
@@ -25,6 +25,13 @@ app.post('/user',
   checkUserUsername,
   usersControllers.createUser);
 
-app.post('/newTask', validateJWT, checkTaskDescription, checkStatus, toDoListControllers.insertNewTask);
+app.post(
+  '/newTask',
+  validateJWT,
+  checkTaskDescription,
+  checkStatus,
+  checkUserRolePermission,
+  toDoListControllers.insertNewTask,
+);
 
 module.exports = app;

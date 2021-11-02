@@ -19,7 +19,14 @@ const checkStatus = (req, res, next) => {
   return res.status(400).json({ message: 'Invalid entries. Status has a wrong value' });
 };
 
+const checkUserRolePermission = (req, res, next) => {
+  const { role } = req.role;
+  if (role === 'Developer') return res.status(400).json({ message: 'Developers cannot create a new task' });
+  return next();
+};
+
 module.exports = {
   checkTaskDescription,
   checkStatus,
+  checkUserRolePermission,
 };
