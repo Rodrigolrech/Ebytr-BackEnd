@@ -9,8 +9,9 @@ const checkTaskDescription = (req, res, next) => {
 };
 
 const checkStatus = (req, res, next) => {
-  const { status } = req.body;
+  let { status } = req.body;
   if (!status) {
+    status = 'Pendente';
     req.body.status = 'Pendente';
   }
   if (status === 'Pendente' || status === 'em andamento' || status === 'Pronto') {
