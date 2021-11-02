@@ -18,7 +18,14 @@ const deleteTask = async (req, res) => {
   return res.status(response.status).json(response.message);
 };
 
+const getAllTasks = async (req, res) => {
+  const { sorted } = req.body;
+  const response = await toDoListService.getAllTasks(sorted);
+  return res.status(response.status).json(response.message);
+};
+
 module.exports = {
   insertNewTask,
   deleteTask,
+  getAllTasks,
 };
