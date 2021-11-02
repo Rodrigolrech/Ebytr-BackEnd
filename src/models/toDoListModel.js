@@ -26,8 +26,16 @@ const getTaskById = async (_id) => {
   return task;
 };
 
+const getAllTasks = async (sorted) => {
+  const getCollection = await mongoConnection.getConnection()
+    .then((db) => db.collection('tasks'));
+  const tasks = await getCollection.find().sort({ sorted });
+  return tasks;
+};
+
 module.exports = {
   insertNewTask,
   deleteTask,
   getTaskById,
+  getAllTasks,
 };
