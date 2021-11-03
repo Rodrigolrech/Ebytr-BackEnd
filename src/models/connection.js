@@ -1,13 +1,13 @@
 const { MongoClient } = require('mongodb');
 
-const MONGO_DB_URL = 'mongodb://localhost:27017/Ebytr';
+const uri = 'mongodb+srv://dbUser:dbUserPassword@cluster0.ie6v8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 let schema = null;
 
 async function getConnection() {
   if (schema) return Promise.resolve(schema);
   return MongoClient
-    .connect(MONGO_DB_URL, {
+    .connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
